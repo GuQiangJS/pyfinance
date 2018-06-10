@@ -5,15 +5,56 @@ import datetime
 import json
 
 import requests
+import pandas as pd
+from pandas.io.json import json_normalize
 
+class translate():
+    def daily_json_to_dataframe(json_str,index=['Date'],columns=['Date','Open','Close','Change','Quote','Low','High','Volume','Turnover','Rate']):
+        """
+        每日成交汇总数据的 json 内容转 `pandas.DataFrame`
+
+        取 json 内容中的 第一个元素中的 'hq' 的列表内容为表格
+        :return:
+        """
+        return json_normalize(json_str[0],record_path='hq')
 
 class capture():
+    def online_daily_sohu_shzs(self, start_date: datetime.date = datetime.date(2004, 10, 8),
+                               end_date: datetime.date = datetime.date.today() + datetime.timedelta(days=-1)):
+        """
+        从 搜狐 获取 **上证指数** 指定日期之间的每日成交汇总数据
+
+        :param start_date: 开始日期。 默认值：2004-10-08
+
+        :param end_date: 结束日期。如果不传入数据，会取当前日期的 **前一天** 作为默认值。
+
+        :return: 返回按照 **交易日期反向排序** 的Json对象。
+
+        参考 datas.capture.__online_daily_sohu__ 返回值示例
+        """
+        return self.__online_daily_sohu__('zs_000001', start_date=start_date, end_date=end_date)
+
     def online_daily_sohu(self, sybmol: str, start_date: datetime.date = datetime.date(2004, 10, 8),
                           end_date: datetime.date = datetime.date.today() + datetime.timedelta(days=-1)):
         """
+        从 搜狐 获取 **指定股票** 指定日期之间的每日成交汇总数据
+
+        :param start_date: 开始日期。 默认值：2004-10-08
+
+        :param end_date: 结束日期。如果不传入数据，会取当前日期的 **前一天** 作为默认值。
+
+        :return: 返回按照 **交易日期反向排序** 的Json对象。
+
+        参考 datas.capture.__online_daily_sohu__ 返回值示例
+        """
+        return self.__online_daily_sohu__('cn_' + sybmol, start_date=start_date, end_date=end_date)
+
+    def __online_daily_sohu__(self, sybmol: str, start_date: datetime.date = datetime.date(2004, 10, 8),
+                              end_date: datetime.date = datetime.date.today() + datetime.timedelta(days=-1)):
+        """
         从 搜狐 获取指定日期之间的每日成交汇总数据
 
-        :param sybmol: 指定的股票代码。For example:600001,000002,300002
+        :param sybmol: 指定的股票代码。For example: sz_000001(上证指数）,cn_000002（万科）
 
         :param start_date: 开始日期。 默认值：2004-10-08
 
@@ -92,7 +133,7 @@ class capture():
         """
         # http://q.stock.sohu.com/hisHq?code=cn_600569&start=20041008&end=20180608&stat=1&order=D&period=d&rt=jsonp
         context = self.__request_context__(
-            'http://q.stock.sohu.com/hisHq?code=cn_{sybmol}&start={sds}&end={eds}&stat=1&order=D&period=d&rt=jsonp'.format(
+            'http://q.stock.sohu.com/hisHq?code={sybmol}&start={sds}&end={eds}&stat=1&order=D&period=d&rt=jsonp'.format(
                 sybmol=sybmol, sds=start_date.strftime('%Y%m%d'), eds=end_date.strftime('%Y%m%d')))
         txt = str(context, encoding='ISO-8859-9')
         return json.loads(txt[9:-2])

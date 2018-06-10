@@ -34,6 +34,3 @@ class Test_example(unittest.TestCase):
                 pd = pandas.DataFrame(re[0]['hq'],columns=['Date','Open','Close','Change','Quote','Low','High','Volume','Turnover','Rate'])
                 # 保存 `pandas.DataFrame` 至 `csv` 格式。跳过索引列
                 pd.to_csv(filename,mode='w+',encoding='utf-8',index=False)
-
-    def test1(self):
-        pass

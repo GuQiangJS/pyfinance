@@ -30,6 +30,16 @@ class Test_capture(unittest.TestCase):
         self.assertTrue('2018-06-08' in re[0]['hq'][0][0])
         self.assertTrue('2018-06-05' in re[0]['hq'][-1][0])
 
+    def test_get_shzs(self):
+        """
+        测试获取上证指数
+        :return:
+        """
+        re=capture().online_daily_sohu_shzs(start_date=datetime.date(2018, 6, 5),
+                                         end_date=datetime.date(2018, 6, 8))
+        self.assertTrue(re)
+        print(re)
+
 
 if __name__ == '__main__':
     unittest.main()

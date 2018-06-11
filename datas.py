@@ -4,19 +4,38 @@
 import datetime
 import json
 
-import requests
 import pandas as pd
-from pandas.io.json import json_normalize
+import requests
+
 
 class translate():
-    def daily_json_to_dataframe(json_str,index=['Date'],columns=['Date','Open','Close','Change','Quote','Low','High','Volume','Turnover','Rate']):
+    def daily_json_to_dataframe(json_str, index=['Date'],
+                                columns=['Date', 'Open', 'Close', 'Change', 'Quote', 'Low', 'High', 'Volume',
+                                         'Turnover', 'Rate'], sort_index: bool = True, ascending: bool = True):
         """
         每日成交汇总数据的 json 内容转 `pandas.DataFrame`
 
         取 json 内容中的 第一个元素中的 'hq' 的列表内容为表格
+
+        * 程序会自动根据 `index` 参数设置返回的 `pandas.DataFrame` 的 索引
+
+        * 程序会自动将 `Close` 列转换为 `float64` 类型。
+            >> 如果以上列存在于 pandas.DataFrame` 中
+        :param index: 索引列。默认为 `Date`
+        :param columns: 读取列
+        :param sort_index: 是否按照索引列排序。
+        :param ascending: 排序规则。默认为 `True`。
         :return:
         """
-        return json_normalize(json_str[0],record_path='hq')
+        df = pd.DataFrame(json_str[0]['hq'], columns=columns)
+        if index:
+            df = df.set_index(index)
+        if 'Close' in columns:
+            df['Close'] = pd.to_numeric(df['Close'], downcast='signed')
+        if sort_index:
+            df = df.sort_index(ascending = ascending)
+        return df
+
 
 class capture():
     def online_daily_sohu_shzs(self, start_date: datetime.date = datetime.date(2004, 10, 8),

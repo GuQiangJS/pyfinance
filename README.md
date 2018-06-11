@@ -13,3 +13,7 @@ udacity -> Machine Learning for Trading
 * [numpy](www.numpy.org)
 
 * [Matplotlib](www.matplotlib.org)
+
+---
+
+* [课程6：01-05 Incomplete data 遇到不完整数据时的处理](blob/master/classes/6.md)

@@ -16,4 +16,4 @@ udacity -> Machine Learning for Trading
 
 ---
 
-* [课程6：01-05 Incomplete data 遇到不完整数据时的处理](blob/master/classes/6.md)
+* [课程6：01-05 Incomplete data 遇到不完整数据时的处理](classes/6.md)

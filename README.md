@@ -137,11 +137,11 @@ std=0.024173739532273256
 kurtosis=4.944185913703685
 ```
 
-![1529545664691](D:\GitHub\financepy\images\1529545664691.png)
+![1529545664691](D:\GitHub\pyfinance\assets/1529545664691.png)
 
-![1529545672612](D:\GitHub\financepy\images\1529545672612.png)
+![1529545672612](D:\GitHub\pyfinance\assets/1529545672612.png)
 
-![1529545680236](D:\GitHub\financepy\images\1529545680236.png)
+![1529545680236](D:\GitHub\pyfinance\assets/1529545680236.png)
 
 ##### 绘制两个直方图
 
@@ -174,7 +174,7 @@ def test_01_06_08_plot_two_histograms_together__(self):
     plt.show()
 ```
 
-![1529546724852](D:\GitHub\financepy\images\1529546724852.png)![1529546875819](D:\GitHub\financepy\images\1529546875819.png)
+![1529546724852](D:\GitHub\pyfinance\assets/1529546724852.png)![1529546875819](D:\GitHub\pyfinance\assets/1529546875819.png)
 
 ##### 将多支股票的日收益率合并在一张图上显示
 
@@ -244,13 +244,13 @@ def test_01_06_13_scatterplots(self):
 	print(daily_returns.corr(method='pearson'))
 ```
 
-![1529571789080](D:\GitHub\financepy\images\1529571789080.png)
+![1529571789080](D:\GitHub\pyfinance\assets/1529571789080.png)
 
-![1529571804284](D:\GitHub\financepy\images\1529571804284.png)
+![1529571804284](D:\GitHub\pyfinance\assets/1529571804284.png)
 
-![1529571812182](D:\GitHub\financepy\images\1529571812182.png)
+![1529571812182](D:\GitHub\pyfinance\assets/1529571812182.png)
 
-![1529571817364](D:\GitHub\financepy\images\1529571817364.png)
+![1529571817364](D:\GitHub\pyfinance\assets/1529571817364.png)
 
 #### 01-07 Sharpe ratio and other portfolio statistics
 

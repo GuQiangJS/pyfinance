@@ -162,3 +162,33 @@ def par_value(n):
 
 [Numba](https://numba.pydata.org/)
 
+```python
+import time
+from math import cos, log
+
+import numba
+
+
+def f_py(I, J):
+    res = 0
+    for i in range(I):
+        for j in range(J):
+            res += int(cos(log(1)))
+    return res
+
+
+t0 = time.time()
+f_py(5000, 5000)
+# 15.500446796417236 seconds wall time
+print(time.time() - t0, "seconds wall time")
+
+t0 = time.time()
+n_py = numba.jit(f_py)
+# 0.3871641159057617 seconds wall time
+n_py(5000, 5000)
+print(time.time() - t0, "seconds wall time")
+```
+
+## 第九章 数学工具
+
+## 第十章 推断统计学

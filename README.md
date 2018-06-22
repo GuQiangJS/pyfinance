@@ -254,6 +254,90 @@ def test_01_06_13_scatterplots(self):
 
 #### 01-07 Sharpe ratio and other portfolio statistics
 
+[夏普比率-wikipedia](https://zh.wikipedia.org/wiki/%E8%AF%81%E5%88%B8%E6%8A%95%E8%B5%84%E5%9F%BA%E9%87%91#%E5%A4%8F%E6%99%AE%E6%AF%94%E7%8E%87)
+
+[百度百科](https://baike.baidu.com/item/%E5%A4%8F%E6%99%AE%E6%AF%94%E7%8E%87)
+
 * 波动性类似时，选择回报率更高的。
 * 回报率类似时，选择波动性（风险）较低的。
+
+> 夏普比率对于相同的资产可以有相当大的变化。这取决于采样有多频繁。每年、每月、每天采样，获取的数值是不同的。
+>
+> 最初版本的夏普比率是一个**年化**测量值。如果要以一个非年化的频率来采样，需要**乘以一个调整因子**（K）来使其正常工作。这个调整因子（K）就是**每年采样数量值的平方根**。
+>
+> * 假如使用日交易数据，每年共有252个交易日，那么 K 就是 252 的平方根。
+> * 使用周数据时，就是 52 的平方根。
+> * **假设只交易了85天，但是采用的还是每日采样，那么K还是252的平凡根**
+
+#### 01-08 Optimizers: Building a parameterized model
+
+```python
+import unittest
+
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy.optimize as spo
+
+import test_helper
+
+
+class MyTestCase(test_helper.MyTestBase):
+    def test_run(self):
+        Xguess = 2.0
+        min_result = spo.minimize(MyTestCase.f, Xguess, method='SLSQP', options={'disp': True})
+        print('Minima found at:')
+        print('X={X}, Y={Y}'.format(X=min_result.x, Y=min_result.fun))
+
+        Xplot = np.linspace(0.5, 2.5, 21)
+        Yplot = MyTestCase.f(Xplot)
+        plt.plot(Xplot, Yplot)
+        plt.plot(min_result.x, min_result.fun, 'ro')
+        plt.title('Minima of an objective function')
+        plt.show()
+
+    def f(X):
+        Y = (X - 1.5) ** 2 + 0.5
+        print('X={X}, Y={Y}'.format(X=X, Y=Y))
+        return Y
+
+
+if __name__ == '__main__':
+    unittest.main()
+```
+
+```
+X=[ 2.], Y=[ 0.75]
+X=[ 2.], Y=[ 0.75]
+X=[ 2.00000001], Y=[ 0.75000001]
+X=[ 0.99999999], Y=[ 0.75000001]
+X=[ 1.5], Y=[ 0.5]
+X=[ 1.5], Y=[ 0.5]
+X=[ 1.50000001], Y=[ 0.5]
+Optimization terminated successfully.    (Exit mode 0)
+            Current function value: 0.5
+            Iterations: 2
+            Function evaluations: 7
+            Gradient evaluations: 2
+Minima found at:
+X=[ 1.5], Y=0.5
+X=[ 0.5  0.6  0.7  0.8  0.9  1.   1.1  1.2  1.3  1.4  1.5  1.6  1.7  1.8  1.9
+  2.   2.1  2.2  2.3  2.4  2.5], Y=[ 1.5   1.31  1.14  0.99  0.86  0.75  0.66  0.59  0.54  0.51  0.5   0.51
+  0.54  0.59  0.66  0.75  0.86  0.99  1.14  1.31  1.5 ]
+```
+
+![1529654821512](assets/1529654821512.png)
+
+凸函数 [wikipedia](https://zh.wikipedia.org/wiki/%E5%87%B8%E5%87%BD%E6%95%B0)
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/0yg97345Hgw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
+
+
+
+
+
+
+
+
 

@@ -7,12 +7,10 @@ udacity -> Machine Learning for Trading
 ## 相关资源：
 
 * [Python金融大数据分析](https://item.jd.com/11808235.html) (京东商城)
-
 * [pandas](pandas.pydata.org)
-
 * [numpy](www.numpy.org)
-
 * [Matplotlib](www.matplotlib.org)
+* [Machine Learning for Trading | Udacity - YouTube](https://www.youtube.com/playlist?list=PLAwxTw4SYaPnIRwl6rad_mYwEk4Gmj7Mx)
 
 ---
 
@@ -329,9 +327,9 @@ X=[ 0.5  0.6  0.7  0.8  0.9  1.   1.1  1.2  1.3  1.4  1.5  1.6  1.7  1.8  1.9
 
 凸函数 [wikipedia](https://zh.wikipedia.org/wiki/%E5%87%B8%E5%87%BD%E6%95%B0)
 
-<iframe width="640" height="360" src="https://www.youtube.com/embed/0yg97345Hgw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+[01-08-6 Building a parameterized model - Youtube](https://youtu.be/0yg97345Hgw)
 
-
+[01-08-8 Minimizer finds coefficients - Youtube](https://youtu.be/9y3Nov-IjvQ)
 
 
 
